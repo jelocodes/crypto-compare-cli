@@ -6,10 +6,10 @@ class CLI
 
 		puts "Welcome to CryptoCompare"
 		puts "Please enter your fiat currency of interest:"
-		base_currency = gets.chomp
+		base_currency = gets.downcase.chomp
 
 		puts "Please enter your crypto currency of interest:"
-		crypto_currency = gets.chomp
+		crypto_currency = gets.downcase.chomp
 
 		s = Scraper.new
 		s.get_page
