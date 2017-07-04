@@ -17,20 +17,22 @@ class CLI
 		data = s.get_attributes(crypto_currency)
 
 		crypto_currency = CryptoCurrency.new(data)
-		usd = Money.new("#{crypto_currency.price}".delete("$").to_i*100, "USD")
+		price = Money.new("#{crypto_currency.price}".delete("$").to_f*100, "USD")
+		cap = Money.new("#{crypto_currency.market_cap}".delete("$").to_i*100, "USD")
+		cap_value = crypto_currency.market_cap.delete("$,").length >= 10 ? "billion" : "million"
+		volume = Money.new("#{crypto_currency.volume}".delete("$").to_f*100, "USD")
+		change_direction = crypto_currency.percent_change[0] == "-" ? "v" : "^"
 
-		puts "Please enter your fiat currency of interest:"
+
+		puts "Please enter your fiat currency of interest's ISO code (e.g. USD, CAD, GBP, JPY, etc.):"
 		base_currency = gets.upcase.chomp.to_sym
-
-		binding.pry
 
 		puts "-"*20
 		puts "Crypto Currency: #{crypto_currency.name}"
-		puts "Current Price: #{usd.exchange_to(base_currency).symbol}#{usd.exchange_to(base_currency)} #{usd.exchange_to(base_currency).currency.iso_code}"
-		puts "Market Cap: #{crypto_currency.market_cap}"
+		puts "Current Price: #{price.exchange_to(base_currency).symbol}#{price.exchange_to(base_currency)} #{price.exchange_to(base_currency).currency.iso_code}"
+		puts "Market Cap:  #{cap.exchange_to(base_currency).symbol}#{cap.exchange_to(base_currency)} #{cap_value} #{cap.exchange_to(base_currency).currency.iso_code}"
 		puts "Circulating Supply: #{crypto_currency.circulating_supply}"
-		puts "Volume: #{crypto_currency.volume}"
-		puts "Percent Change: #{crypto_currency.percent_change}"
+		puts "Percent Change (24 hrs): #{crypto_currency.percent_change} #{change_direction}" 
 		puts "-"*20
 
 	end
