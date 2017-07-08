@@ -8,13 +8,24 @@ class CLI
 
 		Money.default_bank = Money::Bank::GoogleCurrency.new
 
-		puts "Welcome to CryptoCompare"
+		puts "Welcome to CryptoCompare!"
 
 		set_crypto_currency_and_data
 		set_variables
 		set_infinite_precision	
 		set_base_currency
 		display_results
+	end
+
+	def set_crypto_currency_and_data
+		puts "Please enter your crypto currency of interest (e.g., bitcoin, ethereum, etc.):"
+		@crypto_currency = gets.downcase.chomp
+		@data = @s.get_attributes(@crypto_currency)
+
+		if @data["price"] == ""
+			puts "No such crypto currency found."
+			set_crypto_currency_and_data
+		end
 	end
 
 	def set_variables
@@ -30,27 +41,6 @@ class CLI
 		@crypto_currency.price.to_f < 1 ? Money.infinite_precision = true : Money.infinite_precision = false
 	end
 
-	def display_results
-		puts "-"*20
-		puts "Crypto Currency: #{@crypto_currency.name}"
-		puts "Current Price: #{@price.exchange_to(@base_currency).symbol}#{@price.exchange_to(@base_currency)} #{@price.exchange_to(@base_currency).currency.iso_code}"
-		puts "Market Cap:  #{@cap.exchange_to(@base_currency).symbol}#{@cap.exchange_to(@base_currency)} #{@cap_value} #{@cap.exchange_to(@base_currency).currency.iso_code}"
-		puts "Circulating Supply: #{@crypto_currency.circulating_supply}"
-		puts "Percent Change (24 hrs): #{@crypto_currency.percent_change} #{@change_direction}" 
-		puts "-"*20	
-	end
-
-	def set_crypto_currency_and_data
-		puts "Please enter your crypto currency of interest (e.g., bitcoin, ethereum, etc.):"
-		@crypto_currency = gets.downcase.chomp
-		@data = @s.get_attributes(@crypto_currency)
-
-		if @data["price"] == ""
-			puts "No such crypto currency found."
-			set_crypto_currency_and_data
-		end
-	end
-
 	def set_base_currency
 		puts "Please enter your fiat currency of interest's ISO code (e.g. USD, CAD, GBP, JPY, etc.):"
 		@base_currency = gets.upcase.chomp.to_sym
@@ -60,5 +50,15 @@ class CLI
 			set_base_currency
 		end
 	end	
+
+	def display_results
+		puts "-"*20
+		puts "Crypto Currency: #{@crypto_currency.name}"
+		puts "Current Price: #{@price.exchange_to(@base_currency).symbol}#{@price.exchange_to(@base_currency)} #{@price.exchange_to(@base_currency).currency.iso_code}"
+		puts "Market Cap:  #{@cap.exchange_to(@base_currency).symbol}#{@cap.exchange_to(@base_currency)} #{@cap_value} #{@cap.exchange_to(@base_currency).currency.iso_code}"
+		puts "Circulating Supply: #{@crypto_currency.circulating_supply}"
+		puts "Percent Change (24 hrs): #{@crypto_currency.percent_change} #{@change_direction}" 
+		puts "-"*20	
+	end
 
 end
