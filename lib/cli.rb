@@ -2,19 +2,20 @@ require_relative '../config/environment'
 
 class CLI
 
+	puts "Welcome to CryptoCompare!"
+
 	def call
 		@s = Scraper.new
 		@s.get_page
 
 		Money.default_bank = Money::Bank::GoogleCurrency.new
 
-		puts "Welcome to CryptoCompare!"
-
 		set_crypto_currency_and_data
 		set_variables
 		set_infinite_precision	
 		set_base_currency
 		display_results
+		another_or_exit
 	end
 
 	def set_crypto_currency_and_data
@@ -59,6 +60,22 @@ class CLI
 		puts "Circulating Supply: #{@crypto_currency.circulating_supply}"
 		puts "Percent Change (24 hrs): #{@crypto_currency.percent_change} #{@change_direction}" 
 		puts "-"*20	
+	end
+
+	def another_or_exit
+		puts "Convert another? y/n"
+		input = gets.downcase.chomp
+
+		case input 
+		when "y"
+			call
+		when "n"
+			puts "Thank you for using CryptoCompare!"
+			exit
+		else
+			puts "Incorrect input."
+			another_or_exit
+		end
 	end
 
 end
