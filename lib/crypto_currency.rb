@@ -7,5 +7,4 @@ class CryptoCurrency
 		data.each{|key,value| self.send("#{key}=",value)}
 	end	
 
-
 end
