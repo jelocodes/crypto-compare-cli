@@ -67,9 +67,9 @@ class CLI
 		input = gets.downcase.chomp
 
 		case input 
-		when "y"
+		when "y", "yes"
 			call
-		when "n"
+		when "n", "no"
 			puts "Thank you for using CryptoCompare!"
 			exit
 		else
