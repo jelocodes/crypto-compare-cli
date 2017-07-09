@@ -7,6 +7,11 @@ class Scraper
 		@page = Nokogiri::HTML(open("http://coinmarketcap.com/"))
 	end
 
+	def get_list
+		list = []
+		get_page.css("td.currency-name a").each {|crypto| list << crypto.text.downcase }
+	end
+
 	def get_attributes(crypto_currency)
 
 		data = {}
