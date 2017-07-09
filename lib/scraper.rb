@@ -9,7 +9,8 @@ class Scraper
 
 	def get_list
 		list = []
-		get_page.css("td.currency-name a").each {|crypto| list << crypto.text.downcase }
+		get_page.css("td.currency-name a").each {|crypto| list << crypto.text.downcase.gsub(" ","-") if list.size < 10 }
+		list
 	end
 
 	def get_attributes(crypto_currency)

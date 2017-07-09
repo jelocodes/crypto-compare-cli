@@ -9,4 +9,12 @@ class CryptoCurrency
 		@@all << self if !@@all.include?(self)
 	end	
 
+	def self.create_from_collection(crypto_array, data)
+		crypto_array.each{|crypto| CryptoCurrency.new(data)}
+	end
+
+	def self.all
+		@@all
+	end
+
 end
