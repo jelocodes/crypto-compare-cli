@@ -19,7 +19,7 @@ class CLI
 	end
 
 	def set_crypto_currency_and_data
-		puts "Please enter your crypto currency of interest (e.g., bitcoin, ethereum, etc.):"
+		puts "Please enter your crypto currency of interest (e.g. bitcoin, ethereum, etc.) or enter the number or name of an option from the list below:"
 		@crypto_currency = gets.downcase.chomp
 		@data = @s.get_attributes(@crypto_currency)
 
@@ -70,7 +70,7 @@ class CLI
 		when "y", "yes"
 			call
 		when "n", "no"
-			puts "Thank you for using CryptoCompare!"
+			puts "Thank you for using CryptoCompare! Goodbye."
 			exit
 		else
 			puts "Incorrect input."
