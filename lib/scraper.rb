@@ -14,7 +14,6 @@ class Scraper
 	end
 
 	def get_attributes(crypto_currency)
-
 		data = {}
 		data["name"] = crypto_currency
 		data["price"] = @page.css("tr#id-#{crypto_currency} td.no-wrap a.price").text
