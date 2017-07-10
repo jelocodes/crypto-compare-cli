@@ -19,14 +19,12 @@ class CLI
 	end
 
 	def set_crypto_currency_and_data
-		puts "Please enter your crypto currency of interest (e.g. bitcoin, ethereum, etc.) or enter the number or name of an option from the list below:"
+		puts "Please enter your crypto currency of interest (e.g. bitcoin, ethereum, etc.) or enter the number (e.g. 1) or name of an option from the list below:"
 		@s.get_list.each_with_index do |crypto, index| 
-			data = @s.get_attributes(crypto) 
-			crypto_object = CryptoCurrency.new(data) 
-			puts "#{index+1}. #{crypto_object.name}"
+			puts "#{index+1}. #{CryptoCurrency.new(@s.get_attributes(crypto)).name}"
 		end
-		binding.pry
 		@crypto_currency = gets.downcase.chomp
+		@crypto_currency = @s.get_list[@crypto_currency.to_i-1] if @crypto_currency.size == 1 
 		@data = @s.get_attributes(@crypto_currency)
 
 		if @data["price"] == ""
