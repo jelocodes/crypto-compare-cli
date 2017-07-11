@@ -5,8 +5,8 @@ class CryptoCurrency
 	@@all = []
 
 	def initialize(data)
-		data.each{|key,value| self.send("#{key}=",value)}
-		@@all << self if !@@all.include?(self)
+		data.each{|key,value| self.send("#{key}=",value)} 
+		@@all << self if !@@all.detect {|crypto| crypto.name == self.name}
 	end	
 
 	def self.all

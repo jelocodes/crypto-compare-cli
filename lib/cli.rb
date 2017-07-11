@@ -74,7 +74,8 @@ class CLI
 		when "y", "yes"
 			call
 		when "n", "no"
-			puts "Thank you for using CryptoCompare! Goodbye."
+			puts "Thank you for using CryptoCompare!"
+			puts "Goodbye."
 			exit
 		else
 			puts "Incorrect input."
