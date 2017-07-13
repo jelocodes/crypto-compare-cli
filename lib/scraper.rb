@@ -3,12 +3,12 @@ require_relative '../config/environment'
 class Scraper
 	attr_accessor :page
 
-	def get_page
+	def initialize
 		@page = Nokogiri::HTML(open("http://coinmarketcap.com/"))
 	end
 
 	def get_list
-		get_page.css("td.currency-name a" ).enum_for(:each_with_index).collect {|crypto, index| crypto.text.downcase.gsub(" ","-") if index < 10 }
+		page.css("td.currency-name a" ).enum_for(:each_with_index).collect {|crypto, index| crypto.text.downcase.gsub(" ","-") if index <= 9 }
 	end
 
 	def get_attributes(crypto_currency)
