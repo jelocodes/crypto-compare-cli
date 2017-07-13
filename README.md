@@ -1,2 +1,13 @@
 # crypto-compare-cli
-A Ruby CLI application to quickly compare fiat and crypto currencies 
+
+CryptoCompare is a CLI that allows you to quickly display information on the top 10 Crypto Currencies (by market cap) in your fiat currency of choice. It uses Uses Nokogiri and OpenURI to scrape data from http://coinmarketcap.com/, which is a complete, up-to-date list of cryptocurrency valuations in USD, ordered from highest to lowest market cap. It also uses the Ruby Money and Google Currency (which extends Ruby Money) gems to instantiate Money objects for currency conversion using data from https://www.google.com/finance/converterWelcome. 
+
+## Usage
+
+Run the CLI by cd'ing into the project directory and running 'bin/cryptocompare'.
+
+The CLI will greet the user, display the top 10 crypto currencies by market cap, and prompt the user for their crypto currency of interest. To choose, the user can either type the crypto currency of interest's name (e.g. bitcoin), or the number that appears with it in the top 10 list.
+
+The user will then be prompted to enter their fiat currency of interest's [ISO Code](https://en.wikipedia.org/wiki/ISO_4217#Active_codes), the shorthand code for a country's national currency. The naming convention is the first two letters of the country (e.g. CA for Canada) followed by the first letter of it's currency (e.g. D for Dollars, put together: CAD).
+
+The information on the user's crypto currency of choice is then displayed in denominations of their chosen fiat currency. The user is then given the option of comparing another crypto currency. They can run the CLI again by choosing 'y' in the prompt, or simply exit with 'n'.
