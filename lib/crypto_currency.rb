@@ -14,7 +14,7 @@ class CryptoCurrency
 	end
 
 	def self.make_crypto_from_list(list, scraper)
-		list.each {|crypto| CryptoCurrency.new(scraper.get_attributes(crypto))}
+		 list.each {|crypto| CryptoCurrency.new(scraper.get_attributes(crypto))}
 	end
 
 end

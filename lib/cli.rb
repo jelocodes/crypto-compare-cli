@@ -15,7 +15,7 @@ class CLI
 		set_infinite_precision	
 		set_base_currency
 		display_results
-		another_or_exit
+		another_or_exit  
 	end
 
 	def set_crypto_currency_and_data
