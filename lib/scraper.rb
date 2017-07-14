@@ -8,7 +8,7 @@ class Scraper
 	end
 
 	def get_list
-		page.css("td.currency-name a" ).enum_for(:each_with_index).collect {|crypto, index| crypto.text.downcase.gsub(" ","-") if index <= 9 }
+		page.css("td.currency-name a" ).enum_for(:each_with_index).collect {|crypto, index| crypto.text.downcase.gsub(" ","-") if index <= 9 }.compact
 	end
 
 	def get_attributes(crypto_currency)
