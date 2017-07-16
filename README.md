@@ -2,10 +2,6 @@
 
 CryptoCompare is a CLI that allows you to quickly display information on a crypto currency converted to denominations of your fiat currency of choice. It uses Nokogiri and OpenURI to scrape data from http://coinmarketcap.com/, which is a complete, up-to-date list of cryptocurrency valuations in USD, ordered from highest to lowest market cap. It also uses the Ruby Money and Google Currency (which extends Ruby Money) gems to instantiate Money objects for currency conversion using data from https://www.google.com/finance/converterWelcome. 
 
-## Usage
-
-Run the CLI by cd'ing into the project directory and running 'bin/cryptocompare'.
-
 ## Installation & Usage
 
 After checking out the repo, cd into the project directory and run 'bin/cryptocompare'.
